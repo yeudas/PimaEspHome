@@ -1,0 +1,136 @@
+substitutions:
+  <<: !include "../secrets.yaml"
+  
+esphome:
+  name: pima
+  platform: ESP8266
+  board: esp01_1m
+  includes:
+    - esphome_Pima.h
+  libraries:
+    - "ArduinoQueue"
+
+
+wifi:
+  ssid: $iot_down_ssid
+  password: $iot_down_password
+  manual_ip:
+    static_ip: $ip_pima
+    gateway: $iot_gateway
+    subnet: $iot_subnet
+    dns1: $iot_dns1
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Test Esphome Fallback Hotspot"
+    password: $esphome_backup_password
+
+captive_portal:
+
+# Enable logging
+logger:
+  level: DEBUG
+  hardware_uart: UART1
+  
+# Enable Home Assistant API
+#api:
+
+mqtt:
+  broker: $mqtt_broker
+  username: $mqtt_user
+  password: $mqtt_password
+  discovery_retain: False
+  topic_prefix: pima
+
+ota:
+
+web_server:
+  port: 80
+  
+custom_component:
+- lambda: |-
+    auto pima = new esphome_pima_component();
+    
+    pima->onAlarmStatusChange([&](std::string statusCode) {
+      if (id(alarm_status).state != statusCode) {
+        id(alarm_status).publish_state(statusCode);
+      } 
+    });
+    
+    // add list of zones - where case number is the actual sensor number in the alarm - and the id if for the binary sensor reference
+    pima->onZoneStatusChange([&](uint8_t zone, bool open) {
+      switch (zone) {
+        case 1: id(z1).publish_state(open); break;
+        case 2: id(z2).publish_state(open); break;
+        case 3: id(z3).publish_state(open); break;
+        case 5: id(z5).publish_state(open); break;
+        case 6: id(z6).publish_state(open); break;
+        case 7: id(z7).publish_state(open); break;
+        case 8: id(z8).publish_state(open); break;
+        case 17: id(z17).publish_state(open); break;
+        case 18: id(z18).publish_state(open); break;
+        case 19: id(z19).publish_state(open); break;
+        case 21: id(z21).publish_state(open); break;
+        case 22: id(z22).publish_state(open); break;
+      }
+    });
+    return {pima};
+
+
+binary_sensor:
+  - platform: template
+    id: z1
+    name: "Entrance door"
+    device_class: door
+  - platform: template
+    id: z2
+    name: "Entrance door motion"
+    device_class: motion
+  - platform: template
+    id: z3
+    name: "Mamad motion"
+    device_class: motion
+  - platform: template
+    id: z5
+    name: "Living motion"
+    device_class: motion
+  - platform: template
+    id: z6
+    name: "Kitchen room motion"
+    device_class: motion
+  - platform: template
+    id: z7
+    name: "Kitchen door motion"
+    device_class: motion
+  - platform: template
+    id: z8
+    name: "Basement motion"
+    device_class: motion
+  - platform: template
+    id: z17
+    name: "Room1 motion"
+    device_class: motion
+  - platform: template
+    id: z18
+    name: "Work motion"
+    device_class: motion
+  - platform: template
+    id: z19
+    name: "Room2 motion"
+    device_class: motion
+  - platform: template
+    id: z21
+    name: "Service motion"
+    device_class: motion
+  - platform: template
+    id: z22
+    name: "Bedroom motion"
+    device_class: motion
+
+
+text_sensor:
+  - platform: template
+    id: alarm_status
+    name: "Alarm Status"
+    icon: "mdi:shield"
+

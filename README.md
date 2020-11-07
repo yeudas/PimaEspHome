@@ -15,6 +15,7 @@ Compile directly in Home Assistant + ESPHome
 No real documentation for now 
 
 This is a rough implementation, stability is not guaranteed
+A lot of stuff was hardcoded and should be fixed for next version
 
 Based on projects :
 https://github.com/deiger/Alarm by deiger

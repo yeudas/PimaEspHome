@@ -1,9 +1,19 @@
 # PimaEspHome
 
+This program implements an interface for negotiation with PIMA Hunter Pro alarms.
+It was built based on PIMA™'s General Specification for Home Automation & Building Management protocol Ver. 1.15.
+PIMA™ is a trademark of PIMA Electronic Systems Ltd, http://www.pima-alarms.com.
+This program was built with no affiliation of PIMA Electronic Systems Ltd.
 
+Meant for PIMA Hunter Pro alarm™, with 32, 96 - Will not work with 144 zones.
+Run on ESP8266 boards - Tested on diymore ESP8266 ESP-07 board
+(https://www.aliexpress.com/item/32995506222.html?spm=a2g0s.12269583.0.0.18c66a88PQJJho)
 
+Compile directly in Home Assistant + ESPHome
 
+No real documentation for now 
 
 
 Based on projects :
-https://github.com/deiger/Alarm
+https://github.com/deiger/Alarm by deiger
+https://github.com/Margriko/Paradox-ESPHome by Margriko

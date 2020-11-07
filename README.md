@@ -9,10 +9,12 @@ Meant for PIMA Hunter Pro alarm™, with 32, 96 - Will not work with 144 zones.
 Run on ESP8266 boards - Tested on diymore ESP8266 ESP-07 board
 (https://www.aliexpress.com/item/32995506222.html?spm=a2g0s.12269583.0.0.18c66a88PQJJho)
 
+Need to update the code itself (h and yaml files) to correspond the specific alarm implementation.
 Compile directly in Home Assistant + ESPHome
 
 No real documentation for now 
 
+This is a rough implementation, stability is not guaranteed
 
 Based on projects :
 https://github.com/deiger/Alarm by deiger

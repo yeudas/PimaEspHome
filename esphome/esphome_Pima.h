@@ -201,9 +201,9 @@ void send_login_message()
 	crc = send_byte(0  ,0xa);	// length
 	crc = send_byte(crc,0xd);   // 
 	crc = send_byte(crc,0xf);  // write
-	crc = send_byte(crc,0x4);	// 4 insert you techninan password length
+	crc = send_byte(crc,0x4);	// 4 insert you technician password length
 	crc = send_byte(crc,0x0);	// 
-	crc = send_byte(crc,0x1);	// 1  insert you actual techninan password - assume
+	crc = send_byte(crc,0x1);	// 1  insert you actual technician password - this example is for 1234
 	crc = send_byte(crc,0x2);	// 2
 	crc = send_byte(crc,0x3);	// 3
 	crc = send_byte(crc,0x4);	// 4

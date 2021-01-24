@@ -11,7 +11,11 @@ Run on ESP8266 boards - Tested on diymore ESP8266 ESP-07 board
 
 Need to update the code itself (h and yaml files) to correspond the specific alarm implementation.
 Compile directly in Home Assistant + ESPHome
-
+1. File "esphome_Pima.h" , function send_login_message - update the technian code (length and the code itself)
+2. File "Pima.yaml" 
+   a. update all the standart EspHome stuff like wifi, mqtt server ...
+   b. update the actual sensors you have in you alarm system - there is a remark and look at the example in the current yaml file
+   
 No real documentation for now 
 
 This is a rough implementation, stability is not guaranteed
